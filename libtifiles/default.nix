@@ -1,10 +1,10 @@
 { stdenv, fetchurl, intltool, gettext, makeWrapper, autoconf, automake, autoreconfHook, libtool
-, glib, pkgconfig, libxml2, hicolor-icon-theme
+, glib, pkgconfig, libxml2, hicolor-icon-theme, libticonv
 , libarchive, zlib, libusb, fetchFromGitHub
 }:
 
 stdenv.mkDerivation rec {
-	libname = "cables";
+	libname = "files";
 	pname = "libti${libname}";
 	version = "unstable-2019-01-04";
 
@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
 	configureFlags = [ "--enable-libusb10" ];
 
 	nativeBuildInputs = [ intltool gettext makeWrapper pkgconfig automake autoconf libtool ];
-	buildInputs = [ glib hicolor-icon-theme zlib libarchive libusb ];
+	buildInputs = [ glib hicolor-icon-theme zlib libarchive libusb libticonv ];
 
 	preConfigure = ''
 		cd ${pname}/trunk

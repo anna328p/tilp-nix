@@ -1,10 +1,12 @@
-{ stdenv, fetchurl, intltool, gettext, makeWrapper, autoconf, automake, libtool
+{ stdenv, fetchurl, intltool, gettext, makeWrapper, autoconf, automake, autoreconfHook, libtool
 , glib, pkgconfig, libxml2, hicolor-icon-theme
 , libarchive, zlib, libusb, fetchFromGitHub
 }:
 
 stdenv.mkDerivation rec {
-	name = "libticonv";
+	libname = "conv";
+	pname = "libti${libname}";
+	version = "unstable-2019-01-04";
 
 	src = fetchFromGitHub {
 		owner = "debrouxl";
@@ -14,23 +16,18 @@ stdenv.mkDerivation rec {
 		sha256 = "1yb56alnp396r5cijh9dz5112362m120sjmx4hndrkkirv1z2g24";
 	};
 
-	#configureFlags = [ "--disable-doc" ];
+	configureFlags = [ "--enable-libusb10" ];
 
-	buildInputs = [ glib hicolor-icon-theme zlib libarchive autoconf automake libtool ];
-	nativeBuildInputs = [ intltool gettext makeWrapper pkgconfig ];
+	nativeBuildInputs = [ intltool gettext makeWrapper pkgconfig automake autoconf libtool ];
+	buildInputs = [ glib hicolor-icon-theme zlib libarchive libusb ];
 
 	preConfigure = ''
-		cd libticonv/trunk
+		cd ${pname}/trunk
 		autoreconf -si
-	'';
-	preInstall = ''
-	'';
-
-	postInstall = ''
 	'';
 
 	meta = with stdenv.lib; {
-		description = "ticonv library for TI calculators";
+		description = "${libname} library for TI calculators";
 		homepage = http://lpg.ticalc.org/prj_tilp/;
 		license = licenses.gpl2Plus;
 		platforms = platforms.linux;
