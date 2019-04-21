@@ -16,6 +16,10 @@ stdenv.mkDerivation rec {
 		sha256 = "0iagl2wiaj1wnyybwnq429c2ccadqrywyxfv4krvxnwr88s67s82";
 	};
 
+	patches = [
+		./pkgconfig-include-ticables.patch
+	];
+
 	#configureFlags = [ "--disable-doc" ];
 
 	nativeBuildInputs = [
