@@ -1,53 +1,32 @@
-{ stdenv, fetchurl, intltool, gettext, makeWrapper, autoconf, automake, libtool
-, glib, pkgconfig, gtk2, libxml2, hicolor-icon-theme, gnome2
-, libusb, libticonv, libticalcs, libtifiles, libticables
-, libarchive, zlib, fetchFromGitHub
+{ stdenv, fetchFromGitHub, autoreconfHook, pkgconfig
+, glib, gtk2
+, libticonv, libticalcs, libtifiles, libticables
 }:
 
 stdenv.mkDerivation rec {
 	pname = "gfm";
-	version = "1.17";
+	version = "1.18-unstable-2019-10-12";
 
 	src = fetchFromGitHub {
 		owner = "debrouxl";
 		repo = "tilp_and_gfm";
-		rev = "ebcaea2388ebbc5ad1985944df7a8a05ce84b38a";
+		rev = "3e17743910aab7bf4493e7859d3b89d698096da2";
 
-		sha256 = "0iagl2wiaj1wnyybwnq429c2ccadqrywyxfv4krvxnwr88s67s82";
+		sha256 = "1dckjh1fn6wqxb48bq2b94fpnn7p4x5jw1dhllsnqycp1aic3hlc";
 	};
 
-	patches = [
-		./pkgconfig-include-ticables.patch
-	];
-
-	#configureFlags = [ "--disable-doc" ];
-
-	nativeBuildInputs = [
-		intltool gettext makeWrapper pkgconfig
-		autoconf automake libtool
-	];
+	nativeBuildInputs = [ pkgconfig autoreconfHook ];
 	buildInputs = [
-		glib gtk2 libxml2 hicolor-icon-theme gnome2.libglade
-		zlib libarchive
+		glib gtk2
 		libticonv libticalcs libtifiles libticables
 	];
 
-	preConfigure = ''
-		cd gfm/trunk
-		autoreconf -si
-	'';
-	preInstall = ''
-	'';
-
-	postInstall = ''
-	'';
+	sourceRoot = "source/${pname}/trunk";
 
 	meta = with stdenv.lib; {
-		description = "Group file manager program for Texas Instruments calculators";
+		description = "Group file manager for Texas Instruments calculators";
 		homepage = http://lpg.ticalc.org/prj_tilp/;
 		license = licenses.gpl2Plus;
 		platforms = platforms.linux;
 	};
 }
-
-# vim: ts=4 sw=4 noet ai
