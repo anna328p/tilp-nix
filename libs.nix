@@ -65,14 +65,14 @@ lib.makeScope newScope (self: with self; {
 		}
 	) {};
 
-	libticalcs = callPackage ({ stdenv, pkgconfig, autoreconfHook, glib, libticables }:
+	libticalcs = callPackage ({ stdenv, pkgconfig, autoreconfHook, glib, libticables, libtifiles }:
 		stdenv.mkDerivation rec {
 			pname = "libticalcs";
 			inherit version src;
 			sourceRoot = "source/${pname}/trunk";
 
 			nativeBuildInputs = [ autoreconfHook pkgconfig ];
-			buildInputs = [ glib libticables libticonv ];
+			buildInputs = [ glib libticables libtifiles libticonv ];
 
 			meta = globalMeta // {
 				description = "Calculators library for Texas Instruments calculators";

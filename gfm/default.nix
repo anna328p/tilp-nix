@@ -1,5 +1,5 @@
 { stdenv, fetchFromGitHub, autoreconfHook, pkgconfig
-, glib, gtk2
+, glib, gtk2, libglade
 , libticonv, libticalcs, libtifiles, libticables
 }:
 
@@ -15,13 +15,15 @@ stdenv.mkDerivation rec {
 		sha256 = "1dckjh1fn6wqxb48bq2b94fpnn7p4x5jw1dhllsnqycp1aic3hlc";
 	};
 
+	sourceRoot = "source/${pname}/trunk";
+
+	patches = [ ./pkgconfig-include-ticables.patch ];
+
 	nativeBuildInputs = [ pkgconfig autoreconfHook ];
 	buildInputs = [
-		glib gtk2
+		glib gtk2 libglade
 		libticonv libticalcs libtifiles libticables
 	];
-
-	sourceRoot = "source/${pname}/trunk";
 
 	meta = with stdenv.lib; {
 		description = "Group file manager for Texas Instruments calculators";

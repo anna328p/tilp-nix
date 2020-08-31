@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, autoreconfHook, pkgconfig
+{ stdenv, fetchFromGitHub, autoreconfHook, pkgconfig, intltool
 , glib, gtk2
 , libusb1
 , libticonv, libticalcs, libtifiles, libticables
@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
 		sha256 = "1dckjh1fn6wqxb48bq2b94fpnn7p4x5jw1dhllsnqycp1aic3hlc";
 	};
 
-	nativeBuildInputs = [ pkgconfig autoreconfHook ];
+	nativeBuildInputs = [ pkgconfig intltool autoreconfHook ];
 	buildInputs = [
 		glib gtk2
 		libusb1

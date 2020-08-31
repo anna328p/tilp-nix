@@ -1,7 +1,7 @@
-diff --git a/gfm/trunk/configure.ac b/gfm/trunk/configure.ac
+diff --git a/configure.ac b/configure.ac
 index 684a2d93..47d775d5 100644
---- a/gfm/trunk/configure.ac
-+++ b/gfm/trunk/configure.ac
+--- a/configure.ac
++++ b/configure.ac
 @@ -59,6 +59,10 @@ PKG_CHECK_MODULES(TICALCS, ticalcs2 >= 1.1.9)
  AC_SUBST(TICALCS_CFLAGS)
  AC_SUBST(TICALCS_LIBS)
@@ -13,10 +13,10 @@ index 684a2d93..47d775d5 100644
  PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.6.0)
  AC_SUBST(GLIB_CFLAGS)
  AC_SUBST(GLIB_LIBS)
-diff --git a/gfm/trunk/src/Makefile.am b/gfm/trunk/src/Makefile.am
+diff --git a/src/Makefile.am b/src/Makefile.am
 index 0cdb2764..07fc6cd3 100644
---- a/gfm/trunk/src/Makefile.am
-+++ b/gfm/trunk/src/Makefile.am
+--- a/src/Makefile.am
++++ b/src/Makefile.am
 @@ -6,7 +6,7 @@ AM_CFLAGS = -Wall -W
  bin_PROGRAMS = gfm
  
