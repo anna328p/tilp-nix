@@ -1,6 +1,7 @@
-self: super: rec {
-    libs = super.callPackage ./libs.nix { };
-
-    tilp = super.callPackage ./tilp/default.nix { inherit libs; };
-    gfm = super.callPackage ./gfm/default.nix { inherit libs; };
+self: super: let
+    tilibs = super.callPackage ./libs.nix { };
+	args = with tilibs; { inherit libticalcs libticonv libtifiles libticables; }
+; in
+    tilp = super.callPackage ./tilp/default.nix args;
+    gfm = super.callPackage ./gfm/default.nix args;
 }
